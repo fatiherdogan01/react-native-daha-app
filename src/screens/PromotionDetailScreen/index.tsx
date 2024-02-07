@@ -3,7 +3,7 @@ import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from 're
 import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton.tsx';
 import axios from 'axios';
-import { BASE_URL, contants, descriptionTagStyle, titleTagStyle } from '../../Contants.ts';
+import { BASE_URL, config, descriptionTagStyle, titleTagStyle } from '../../Contants.ts';
 // @ts-ignore
 import HTMLView from 'react-native-htmlview';
 import ImageWithBrandIcon from '../../components/ImageWithBrandIcon.tsx';
@@ -22,6 +22,7 @@ type PromotionDetailType = {
   Title: string;
   ImageUrl: string;
   RemainingText: string;
+  ListButtonText: string;
 };
 
 const PromotionDetailScreen = () => {
@@ -31,12 +32,10 @@ const PromotionDetailScreen = () => {
   const id: number = route?.params?.id || 0;
   const [promotionDetail, setPromotionDetail] = useState<PromotionDetailType>();
   const [loading, setLoading] = useState(false);
-  console.log(id);
+
   useEffect(() => {
     getPromotionDetail();
   }, []);
-
-  console.log(promotionDetail);
 
   const getPromotionDetail = () => {
     if (id <= 0) {
@@ -45,7 +44,7 @@ const PromotionDetailScreen = () => {
     setLoading(true);
     axios
 
-      .get(`${BASE_URL}/promotions?Id=${id}`, contants)
+      .get(`${BASE_URL}/promotions?Id=${id}`, config)
       .then((res) => {
         setPromotionDetail(res.data);
       })

@@ -7,9 +7,22 @@ import Profile from '../../components/Profile.tsx';
 import langs from '../../langs';
 import { styles } from './styles.ts';
 import axios from 'axios';
-import { BASE_URL, contants, horizontal } from '../../Contants.ts';
+import { BASE_URL, config, horizontal } from '../../Contants.ts';
 import PromotionSwiper from '../../components/PromotionSwiper.tsx';
 
+const Header = () => {
+  return (
+    <View style={styles.header}>
+      <View style={styles.leftContainer}>
+        <Image source={images.daha} style={styles.daha} />
+      </View>
+      <View style={styles.rightContainer}>
+        <CustomButton title={langs.discoverScreen.login} />
+        <Profile hasNotification />
+      </View>
+    </View>
+  );
+};
 const DiscoverScreen = () => {
   const [tags, setTags] = useState([]);
   const [promotions, setPromotions] = useState([]);
@@ -24,9 +37,10 @@ const DiscoverScreen = () => {
   const getPromotions = () => {
     setPromotionsLoading(true);
     axios
-      .get(`${BASE_URL}/promotions/list?Channel=PWA`, contants)
+      .get(`${BASE_URL}/promotions/list?Channel=PWA`, config)
       .then((res) => {
         setPromotions(res.data);
+        console.log(res.data);
       })
       .catch((error) => {
         console.log('error', error);
@@ -38,7 +52,7 @@ const DiscoverScreen = () => {
   const getTags = () => {
     setTagsLoading(true);
     axios
-      .get(`${BASE_URL}/tags/list`, contants)
+      .get(`${BASE_URL}/tags/list`, config)
       .then((res) => {
         setTags(res.data);
         setSelectedTag(res.data[0]);
@@ -56,25 +70,19 @@ const DiscoverScreen = () => {
     setSelectedTag(item);
   };
 
-  const Header = () => {
-    return (
-      <View style={styles.header}>
-        <View style={styles.leftContainer}>
-          <Image source={images.daha} style={styles.daha} />
-        </View>
-        <View style={styles.rightContainer}>
-          <CustomButton title={langs.discoverScreen.login} />
-          <Profile hasNotification />
-        </View>
-      </View>
-    );
-  };
   return (
     <View style={{ margin: horizontal }}>
       <Header />
-      {tagsLoading && <ActivityIndicator />}
-      {tags && <TagsList data={tags} selectedItem={selectedTag} setItem={setTagItem} />}
-      {promotions && <PromotionSwiper data={promotions} />}
+      {tags && !tagsLoading ? (
+        <TagsList data={tags} selectedItem={selectedTag} setItem={setTagItem} />
+      ) : (
+        <ActivityIndicator />
+      )}
+      {promotions && !promotionsLoading ? (
+        <PromotionSwiper data={promotions} />
+      ) : (
+        <ActivityIndicator style={styles.activityIndicator} />
+      )}
     </View>
   );
 };

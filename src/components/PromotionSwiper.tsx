@@ -6,13 +6,7 @@ import Dots from 'react-native-dots-pagination';
 import { Colors } from '../theme/Colors.ts';
 import { useNavigation } from '@react-navigation/native';
 import ImageWithBrandIcon from './ImageWithBrandIcon.tsx';
-import {
-  descriptionTagStyle,
-  horizontal,
-  participationTagStyle,
-  titleTagStyle,
-  vertical,
-} from '../Contants.ts';
+import { participationTagStyle, promotionCardTitleTagStyle } from '../Contants.ts';
 import { ms } from 'react-native-size-matters';
 
 export type PromotionItem = {
@@ -42,29 +36,32 @@ type Props = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: ms(10),
+    alignSelf: 'center',
+  },
   swiperContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   swiper: {
-    marginBottom: 30,
+    marginBottom: ms(30),
     zIndex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '90%',
-    height: ms(420),
+    width: '84%',
     borderWidth: 1.6,
     borderColor: Colors.shadow,
     backgroundColor: Colors.white,
     borderRadius: 10,
-    padding: 4,
+    padding: ms(3),
   },
   swiperBottomView: {
     zIndex: -1,
     position: 'absolute',
     bottom: ms(12),
-    transform: [{ rotate: '4deg' }],
-    width: '90%',
+    transform: [{ rotate: '3deg' }],
+    width: '84%',
     height: ms(40),
     borderRadius: 10,
   },
@@ -104,7 +101,7 @@ const PromotionSwiper = ({ data }: Props) => {
             <HTMLView
               value={item.Title}
               stylesheet={{
-                p: titleTagStyle,
+                p: promotionCardTitleTagStyle,
               }}
             />
             <HTMLView
@@ -125,11 +122,12 @@ const PromotionSwiper = ({ data }: Props) => {
 
   return (
     <View
-      style={{
-        marginTop: 10,
-        alignSelf: 'center',
-        width,
-      }}
+      style={[
+        styles.container,
+        {
+          width,
+        },
+      ]}
     >
       <FlatList
         pagingEnabled
@@ -143,7 +141,7 @@ const PromotionSwiper = ({ data }: Props) => {
         <Dots
           length={data.length}
           passiveColor={Colors.gray}
-          activeColor={data[pageNumber].PromotionCardColor}
+          activeColor={data[pageNumber]?.PromotionCardColor}
           active={pageNumber}
         />
       )}

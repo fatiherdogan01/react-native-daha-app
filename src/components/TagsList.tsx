@@ -18,9 +18,8 @@ type Props = {
 
 const styles = StyleSheet.create({
   badge: {
-    height: ms(42),
+    height: ms(38),
     borderRadius: 10,
-    paddingHorizontal: ms(10),
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: ms(6),
@@ -31,9 +30,11 @@ const styles = StyleSheet.create({
     width: ms(24),
     height: ms(24),
     borderRadius: 6,
+    marginLeft: ms(4),
   },
   title: {
-    paddingHorizontal: ms(6),
+    fontSize: 16,
+    paddingHorizontal: ms(10),
   },
 });
 const TagsList = ({ data, setItem, selectedItem }: Props) => {

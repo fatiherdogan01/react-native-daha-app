@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { headerHeight, vertical } from '../../Contants.ts';
+import { ms } from 'react-native-size-matters';
 
 export const styles = StyleSheet.create({
   header: {
@@ -18,5 +19,8 @@ export const styles = StyleSheet.create({
   },
   leftContainer: {
     flex: 0.6,
+  },
+  activityIndicator: {
+    marginTop: ms(30),
   },
 });
