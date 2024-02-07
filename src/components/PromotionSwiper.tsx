@@ -6,10 +6,15 @@ import Dots from 'react-native-dots-pagination';
 import { Colors } from '../theme/Colors.ts';
 import { useNavigation } from '@react-navigation/native';
 import ImageWithBrandIcon from './ImageWithBrandIcon.tsx';
-import { horizontal, vertical } from '../Contants.ts';
+import {
+  descriptionTagStyle,
+  horizontal,
+  participationTagStyle,
+  titleTagStyle,
+  vertical,
+} from '../Contants.ts';
 import { ms } from 'react-native-size-matters';
 
-const styles = StyleSheet.create({});
 export type PromotionItem = {
   BrandIconColor: string;
   BrandIconUrl: string;
@@ -36,6 +41,34 @@ type Props = {
   data: Array<PromotionItem>;
 };
 
+const styles = StyleSheet.create({
+  swiperContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  swiper: {
+    marginBottom: 30,
+    zIndex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '90%',
+    height: ms(420),
+    borderWidth: 1.6,
+    borderColor: Colors.shadow,
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+    padding: 4,
+  },
+  swiperBottomView: {
+    zIndex: -1,
+    position: 'absolute',
+    bottom: ms(12),
+    transform: [{ rotate: '4deg' }],
+    width: '90%',
+    height: ms(40),
+    borderRadius: 10,
+  },
+});
 const width = Dimensions.get('screen').width;
 const PromotionSwiper = ({ data }: Props) => {
   const navigation = useNavigation();
@@ -59,28 +92,8 @@ const PromotionSwiper = ({ data }: Props) => {
         // @ts-ignore
         onPress={() => navigation.navigate('PromotionDetail', { id: item.Id })}
       >
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: width,
-          }}
-        >
-          <View
-            style={{
-              marginBottom: 30,
-              zIndex: 2,
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '90%',
-              height: ms(420),
-              borderWidth: 1.6,
-              borderColor: Colors.shadow,
-              backgroundColor: Colors.white,
-              borderRadius: 10,
-              padding: 4,
-            }}
-          >
+        <View style={[styles.swiperContainer, { width }]}>
+          <View style={styles.swiper}>
             <ImageWithBrandIcon
               imageUrl={item.ImageUrl}
               brandIconColor={item.BrandIconColor}
@@ -91,38 +104,20 @@ const PromotionSwiper = ({ data }: Props) => {
             <HTMLView
               value={item.Title}
               stylesheet={{
-                p: {
-                  paddingVertical: vertical,
-                  paddingHorizontal: horizontal,
-                  fontWeight: '700',
-                  fontSize: 24,
-                },
+                p: titleTagStyle,
               }}
             />
             <HTMLView
               value={item.BrandPromotionCardParticipationText}
               stylesheet={{
                 p: {
-                  paddingBottom: vertical,
-                  paddingHorizontal: horizontal,
+                  ...participationTagStyle,
                   color: item.PromotionCardColor,
-                  fontWeight: '700',
                 },
               }}
             />
           </View>
-          <View
-            style={{
-              zIndex: -1,
-              position: 'absolute',
-              bottom: 12,
-              transform: [{ rotate: '4deg' }],
-              width: '89%',
-              height: 40,
-              borderRadius: 10,
-              backgroundColor: item.PromotionCardColor,
-            }}
-          />
+          <View style={[{ backgroundColor: item.PromotionCardColor }, styles.swiperBottomView]} />
         </View>
       </TouchableOpacity>
     );

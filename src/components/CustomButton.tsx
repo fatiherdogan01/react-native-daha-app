@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-const CustomButton = ({ title, onPress, backgroundColor = Colors.red }: Props) => {
+const CustomButton = ({ title, onPress, backgroundColor = Colors.red, buttonStyle }: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[{ backgroundColor }, styles.button]}>
+    <TouchableOpacity onPress={onPress} style={[{ backgroundColor }, styles.button, buttonStyle]}>
       <Text style={[{ color: Colors.white }, styles.text]}>{title}</Text>
     </TouchableOpacity>
   );

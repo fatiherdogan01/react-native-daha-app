@@ -17,10 +17,23 @@ type Props = {
 };
 
 const styles = StyleSheet.create({
+  badge: {
+    height: ms(42),
+    borderRadius: 10,
+    paddingHorizontal: ms(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: ms(6),
+    flexDirection: 'row',
+    borderWidth: 1.6,
+  },
   image: {
     width: ms(24),
     height: ms(24),
     borderRadius: 6,
+  },
+  title: {
+    paddingHorizontal: ms(6),
   },
 });
 const TagsList = ({ data, setItem, selectedItem }: Props) => {
@@ -29,21 +42,16 @@ const TagsList = ({ data, setItem, selectedItem }: Props) => {
       {data?.map((item) => (
         <TouchableOpacity
           key={item.Id}
-          style={{
-            height: ms(42),
-            borderRadius: 10,
-            paddingHorizontal: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginRight: ms(6),
-            flexDirection: 'row',
-            borderColor: selectedItem === item ? Colors.red : Colors.shadow,
-            borderWidth: 1.6,
-          }}
+          style={[
+            styles.badge,
+            {
+              borderColor: selectedItem === item ? Colors.red : Colors.shadow,
+            },
+          ]}
           onPress={() => setItem(item)}
         >
           <Image source={{ uri: item.IconUrl }} style={styles.image} />
-          <Text style={{ paddingHorizontal: ms(6) }}>{item.Name}</Text>
+          <Text style={styles.title}>{item.Name}</Text>
         </TouchableOpacity>
       ))}
     </ScrollView>

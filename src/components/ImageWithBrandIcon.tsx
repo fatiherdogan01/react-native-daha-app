@@ -1,8 +1,7 @@
 import React from 'react';
-import { DimensionValue, Image, Text, View } from 'react-native';
+import { DimensionValue, Image, StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../theme/Colors.ts';
 import { ms } from 'react-native-size-matters';
-import { borderRadius } from '../Contants.ts';
 
 type Props = {
   imageUrl: string;
@@ -13,6 +12,40 @@ type Props = {
   height?: DimensionValue | undefined;
   imageBorderRadius?: number;
 };
+
+const styles = StyleSheet.create({
+  brandIconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: ms(84),
+    height: ms(84),
+    borderRadius: 99,
+  },
+  brandIcon: {
+    resizeMode: 'contain',
+    width: '96%',
+    height: '96%',
+  },
+  remainingText: {
+    color: Colors.white,
+    paddingHorizontal: ms(8),
+  },
+  remainingBadge: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: ms(4),
+    right: ms(4),
+    backgroundColor: Colors.black,
+    height: ms(32),
+    borderRadius: 12,
+  },
+});
+
+const borderBottomLeftRadius = 120;
 const ImageWithBrandIcon = ({
   imageUrl,
   brandIconColor,
@@ -20,51 +53,31 @@ const ImageWithBrandIcon = ({
   remainingText,
   width = '100%',
   height = 300,
-  imageBorderRadius,
+  imageBorderRadius = 0,
 }: Props) => {
   return (
     <View style={{ width: '100%' }}>
       <Image
         source={{ uri: imageUrl }}
         style={{
-          borderBottomLeftRadius: 120,
-          borderRadius: imageBorderRadius || 0,
+          borderBottomLeftRadius,
+          borderRadius: imageBorderRadius,
           width,
           height,
         }}
       />
       <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          backgroundColor: brandIconColor,
-          width: ms(84),
-          height: ms(84),
-          borderRadius: 999,
-        }}
+        style={[
+          styles.brandIconContainer,
+          {
+            backgroundColor: brandIconColor,
+          },
+        ]}
       >
-        <Image
-          resizeMode={'contain'}
-          source={{ uri: brandIconUrl }}
-          style={{ width: '96%', height: '96%' }}
-        />
+        <Image source={{ uri: brandIconUrl }} style={styles.brandIcon} />
       </View>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          bottom: ms(4),
-          right: ms(4),
-          backgroundColor: Colors.black,
-          height: ms(32),
-          borderRadius: 12,
-        }}
-      >
-        <Text style={{ color: Colors.white, paddingHorizontal: ms(8) }}>{remainingText}</Text>
+      <View style={styles.remainingBadge}>
+        <Text style={styles.remainingText}>{remainingText}</Text>
       </View>
     </View>
   );

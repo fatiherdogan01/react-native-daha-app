@@ -3,20 +3,13 @@ import { ActivityIndicator, Image, ScrollView, TouchableOpacity, View } from 're
 import { useNavigation, useRoute } from '@react-navigation/native';
 import CustomButton from '../../components/CustomButton.tsx';
 import axios from 'axios';
-import {
-  BASE_URL,
-  contants,
-  desciptionFontSize,
-  horizontal,
-  titleFontSize,
-  vertical,
-} from '../../Contants.ts';
+import { BASE_URL, contants, descriptionTagStyle, titleTagStyle } from '../../Contants.ts';
 // @ts-ignore
 import HTMLView from 'react-native-htmlview';
 import ImageWithBrandIcon from '../../components/ImageWithBrandIcon.tsx';
 import images from '../../assets/images';
-import { Colors } from '../../theme/Colors.ts';
 import langs from '../../langs';
+import { styles } from './styles.ts';
 
 type PromotionDetailType = {
   BrandIconColor: string;
@@ -65,29 +58,15 @@ const PromotionDetailScreen = () => {
   };
 
   const BackButton = () => (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={{
-        zIndex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-        top: 30,
-        left: 10,
-        backgroundColor: Colors.black,
-        width: 40,
-        height: 40,
-        borderRadius: 99,
-      }}
-    >
-      <Image resizeMode={'contain'} source={images.back} style={{ width: '48%', height: '48%' }} />
+    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+      <Image resizeMode={'contain'} source={images.back} style={styles.backImage} />
     </TouchableOpacity>
   );
 
   return (
     <>
       <BackButton />
-      {loading && <ActivityIndicator />}
+      {loading && <ActivityIndicator style={styles.activityIndicator} />}
 
       {promotionDetail && (
         <>
@@ -101,37 +80,24 @@ const PromotionDetailScreen = () => {
             <HTMLView
               value={promotionDetail.Title}
               stylesheet={{
-                p: {
-                  fontWeight: '700',
-                  fontSize: titleFontSize,
-                  paddingVertical: vertical,
-                  paddingHorizontal: horizontal,
-                },
+                p: titleTagStyle,
               }}
             />
             <HTMLView
               value={promotionDetail.Description}
               stylesheet={{
-                p: {
-                  fontSize: desciptionFontSize,
-                  paddingBottom: vertical,
-                  paddingHorizontal: horizontal,
-                },
+                p: descriptionTagStyle,
               }}
             />
           </ScrollView>
+          <View style={styles.bottomButtonContainer}>
+            <CustomButton
+              buttonStyle={styles.bottomButton}
+              title={langs.promotionDetailScreen.joinNow}
+            />
+          </View>
         </>
       )}
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          left: 10,
-          right: 10,
-        }}
-      >
-        <CustomButton buttonStyle={{ width: '80%' }} title={langs.promotionDetailScreen.joinNow} />
-      </View>
     </>
   );
 };

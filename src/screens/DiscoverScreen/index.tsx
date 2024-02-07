@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, View } from 'react-native';
-import { useFetch } from '../../hooks/useFetch.ts';
 import images from '../../assets/images';
 import TagsList, { TagItem } from '../../components/TagsList.tsx';
 import CustomButton from '../../components/CustomButton.tsx';
@@ -8,7 +7,7 @@ import Profile from '../../components/Profile.tsx';
 import langs from '../../langs';
 import { styles } from './styles.ts';
 import axios from 'axios';
-import { BASE_URL, contants } from '../../Contants.ts';
+import { BASE_URL, contants, horizontal } from '../../Contants.ts';
 import PromotionSwiper from '../../components/PromotionSwiper.tsx';
 
 const DiscoverScreen = () => {
@@ -71,7 +70,7 @@ const DiscoverScreen = () => {
     );
   };
   return (
-    <View style={{ margin: 10 }}>
+    <View style={{ margin: horizontal }}>
       <Header />
       {tagsLoading && <ActivityIndicator />}
       {tags && <TagsList data={tags} selectedItem={selectedTag} setItem={setTagItem} />}

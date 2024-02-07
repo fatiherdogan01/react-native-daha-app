@@ -2,7 +2,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Getting Started
 
->**Note**:For iOS Make sure you have install pods.
+>**Note**:For iOS make sure you have install pods.
 
 ```bash
 yarn pod_install
@@ -19,7 +19,7 @@ yarn start
 
 ## Step 2: Start your Application
 
-After the Metro Server starts;
+After the Metro Server starts:
 
 press **a** for android
 
