@@ -1,11 +1,16 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { headerHeight, navigationBarHeight, vertical } from '../../Contants.ts';
-const height = Dimensions.get('screen').height;
 export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: headerHeight,
     marginVertical: vertical,
+  },
+  promotionContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: headerHeight,
+    marginBottom: navigationBarHeight,
   },
   daha: {
     height: '100%',
@@ -20,6 +25,8 @@ export const styles = StyleSheet.create({
     flex: 0.6,
   },
   activityIndicator: {
-    height: height - (headerHeight + navigationBarHeight),
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '80%',
   },
 });

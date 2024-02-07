@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   bottomOpactiy: {
     opacity: 0.3,
-    height: ms(90),
+    height: ms(80),
     backgroundColor: Colors.white,
     position: 'absolute',
     bottom: 0,
@@ -40,5 +40,8 @@ export const styles = StyleSheet.create({
   },
   bottomButton: {
     height: ms(48),
+  },
+  bottomContainer: {
+    marginBottom: ms(58),
   },
 });

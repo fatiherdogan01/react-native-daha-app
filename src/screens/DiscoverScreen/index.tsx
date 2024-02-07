@@ -79,11 +79,13 @@ const DiscoverScreen = () => {
       ) : (
         <ActivityIndicator color={Colors.black} />
       )}
-      {promotions && !promotionsLoading ? (
-        <PromotionSwiper data={promotions} />
-      ) : (
-        <ActivityIndicator color={Colors.black} style={styles.activityIndicator} />
-      )}
+      <View style={styles.promotionContent}>
+        {promotions && !promotionsLoading ? (
+          <PromotionSwiper data={promotions} />
+        ) : (
+          <ActivityIndicator color={Colors.black} style={styles.activityIndicator} />
+        )}
+      </View>
     </View>
   );
 };

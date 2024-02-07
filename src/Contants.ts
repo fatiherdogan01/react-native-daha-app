@@ -13,7 +13,7 @@ export const config = {
 export const navigationBarHeight = ms(60);
 export const headerHeight = ms(40);
 export const borderRadius = 20;
-export const vertical = ms(8);
+export const vertical = ms(10);
 export const horizontal = ms(10);
 
 export const titleTagStyle = {

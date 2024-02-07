@@ -76,14 +76,14 @@ const PromotionDetailScreen = () => {
             brandIconUrl={promotionDetail.BrandIconUrl}
             remainingText={promotionDetail.RemainingText}
           />
-          <ScrollView>
+          <ScrollView style={styles.bottomContainer}>
             <HTMLView
               value={promotionDetail.Title}
               stylesheet={{
                 p: titleTagStyle,
               }}
             />
-            {['1', '2', '3', '4', '5', '6'].map((item) => (
+            {['1', '2', '3', '4', '5', '6', '7'].map((item) => (
               <HTMLView
                 key={item}
                 value={promotionDetail.Description}
