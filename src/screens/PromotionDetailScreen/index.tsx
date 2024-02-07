@@ -82,13 +82,17 @@ const PromotionDetailScreen = () => {
                 p: titleTagStyle,
               }}
             />
-            <HTMLView
-              value={promotionDetail.Description}
-              stylesheet={{
-                p: descriptionTagStyle,
-              }}
-            />
+            {['1', '2', '3', '4', '5', '6'].map((item) => (
+              <HTMLView
+                key={item}
+                value={promotionDetail.Description}
+                stylesheet={{
+                  p: descriptionTagStyle,
+                }}
+              />
+            ))}
           </ScrollView>
+          <View style={styles.bottomOpactiy} />
           <View style={styles.bottomButtonContainer}>
             <CustomButton
               buttonStyle={styles.bottomButton}

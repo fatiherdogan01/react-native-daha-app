@@ -29,6 +29,15 @@ export const styles = StyleSheet.create({
     left: ms(10),
     right: ms(10),
   },
+  bottomOpactiy: {
+    opacity: 0.3,
+    height: ms(90),
+    backgroundColor: Colors.white,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
   bottomButton: {
     height: ms(48),
   },
