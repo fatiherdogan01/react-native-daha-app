@@ -4,7 +4,7 @@ import { ms } from 'react-native-size-matters';
 import { Colors } from '../theme/Colors.ts';
 
 export type TagItem = {
-  Id: string;
+  Id: number;
   Name: string;
   IconUrl: string;
   Rank: string;

@@ -10,6 +10,7 @@ import ImageWithBrandIcon from '../../components/ImageWithBrandIcon.tsx';
 import images from '../../assets/images';
 import langs from '../../langs';
 import { styles } from './styles.ts';
+import { Colors } from '../../theme/Colors.ts';
 
 type PromotionDetailType = {
   BrandIconColor: string;
@@ -65,7 +66,7 @@ const PromotionDetailScreen = () => {
   return (
     <>
       <BackButton />
-      {loading && <ActivityIndicator style={styles.activityIndicator} />}
+      {loading && <ActivityIndicator color={Colors.black} style={styles.activityIndicator} />}
 
       {promotionDetail && (
         <>

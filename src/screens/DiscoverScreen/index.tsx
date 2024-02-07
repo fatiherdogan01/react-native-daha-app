@@ -9,6 +9,7 @@ import { styles } from './styles.ts';
 import axios from 'axios';
 import { BASE_URL, config, horizontal } from '../../Contants.ts';
 import PromotionSwiper from '../../components/PromotionSwiper.tsx';
+import { Colors } from '../../theme/Colors.ts';
 
 const Header = () => {
   return (
@@ -34,13 +35,12 @@ const DiscoverScreen = () => {
     getTags();
   }, []);
 
-  const getPromotions = () => {
+  const getPromotions = (tagId: number) => {
     setPromotionsLoading(true);
     axios
-      .get(`${BASE_URL}/promotions/list?Channel=PWA`, config)
+      .get(`${BASE_URL}/promotions/list?Channel=PWA&TagId=${tagId}`, config)
       .then((res) => {
         setPromotions(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log('error', error);
@@ -56,7 +56,7 @@ const DiscoverScreen = () => {
       .then((res) => {
         setTags(res.data);
         setSelectedTag(res.data[0]);
-        getPromotions();
+        getPromotions(res.data[0].Id);
       })
       .catch((error) => {
         console.log('error', error);
@@ -68,6 +68,7 @@ const DiscoverScreen = () => {
 
   const setTagItem = (item: TagItem) => {
     setSelectedTag(item);
+    getPromotions(item.Id);
   };
 
   return (
@@ -76,12 +77,12 @@ const DiscoverScreen = () => {
       {tags && !tagsLoading ? (
         <TagsList data={tags} selectedItem={selectedTag} setItem={setTagItem} />
       ) : (
-        <ActivityIndicator />
+        <ActivityIndicator color={Colors.black} />
       )}
       {promotions && !promotionsLoading ? (
         <PromotionSwiper data={promotions} />
       ) : (
-        <ActivityIndicator style={styles.activityIndicator} />
+        <ActivityIndicator color={Colors.black} style={styles.activityIndicator} />
       )}
     </View>
   );
